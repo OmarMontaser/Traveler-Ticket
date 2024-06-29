@@ -1,7 +1,10 @@
-﻿namespace TravellerTicket.Core.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TravellerTicket.Core.Entities
 {
     public class Ticket
     {
+        [Key]
         public int Id { get; set; }
         public DateTime Time { get; set; }
         public string PassengerName { get; set; }

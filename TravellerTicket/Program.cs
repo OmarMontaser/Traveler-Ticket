@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using TravellerTicket.Core.AutoMapperConfig;
 using TravellerTicket.Core.Context;
 using TravellerTicket.Helper;
 using TravellerTicket.Services;
@@ -22,6 +23,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddScoped<JWT>();
 builder.Services.Configure<JWT>(builder.Configuration.GetSection("JWT"));
+
+builder.Services.AddAutoMapper(typeof( AutoMapperConfigProfile) );
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
