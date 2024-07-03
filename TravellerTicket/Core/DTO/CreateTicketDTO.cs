@@ -1,13 +1,26 @@
-﻿namespace TravellerTicket.Core.DTO
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TravellerTicket.Core.DTO
 {
     public class CreateTicketDTO
     {
-        public DateTime Time {  get; set; }
-        public string PassengerName { get; set; }
-        public string PassangerSSN { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
-        public string Price { get; set; }
+            [Required]
+            public DateTime Time { get; set; }
+
+            [Required]
+            [StringLength(100)]
+            public string From { get; set; }
+
+            [Required]
+            [StringLength(100)]
+            public string To { get; set; }
+
+            [Required]
+            [Range(0, double.MaxValue)]
+            public double Price { get; set; }
+            public string PassengerName { get; set; }
+
+           public string PassengerId { get; set; }
 
     }
 }

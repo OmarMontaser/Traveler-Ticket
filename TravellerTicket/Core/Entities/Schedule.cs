@@ -1,14 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravellerTicket.Core.DTO
+namespace TravellerTicket.Core.Entities
 {
-    public class UpdateTicketDTO
+    public class Schedule
     {
+        [Key]
+        public int ScheduleId { get; set; }
         public DateTime Time { get; set; }
-        //public string PassengerName { get; set; }
-        //public string PassengerId { get; set; }
         public string From { get; set; }
         public string To { get; set; }
         public double Price { get; set; }
+        public int Capacity { get; set; }
+        // public string AdminId { get; set; }  // From JWT
     }
 }

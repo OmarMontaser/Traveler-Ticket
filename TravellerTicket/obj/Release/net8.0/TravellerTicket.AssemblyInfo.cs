@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TravellerTicket")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7c57c3ab013d8a27009753850e8d8eb6c1dd78e9")]
 [assembly: System.Reflection.AssemblyProductAttribute("TravellerTicket")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TravellerTicket")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

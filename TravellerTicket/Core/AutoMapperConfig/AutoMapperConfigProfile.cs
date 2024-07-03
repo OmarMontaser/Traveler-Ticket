@@ -11,6 +11,10 @@ namespace TravellerTicket.Core.AutoMapperConfig
             CreateMap<CreateTicketDTO, Ticket>();
             CreateMap<Ticket, GetTicketDTO>();
             CreateMap<UpdateTicketDTO,Ticket>();
+           
+            CreateMap<CreateScheduleDTO, Schedule>();
+            CreateMap<Schedule, GetScheduleDTO>();
+            CreateMap<UpdateScheduleDTO, Schedule>();
         }
 
     }
