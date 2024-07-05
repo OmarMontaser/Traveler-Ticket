@@ -1,6 +1,6 @@
-﻿namespace TravellerTicket.Core.DTO
+﻿namespace TravellerTicket.Core.DTO.Admin
 {
-    public class GetScheduleDTO
+    public class GetScheduleAdminDTO
     {
         public int ScheduleId { get; set; }
         public string From { get; set; }

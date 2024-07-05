@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravellerTicket.Core.DTO
+namespace TravellerTicket.Core.DTO.Admin
 {
-    public class UpdateScheduleDTO
+    public class UpdateScheduleAdminDTO
     {
         [Required]
         public string? From { get; set; }

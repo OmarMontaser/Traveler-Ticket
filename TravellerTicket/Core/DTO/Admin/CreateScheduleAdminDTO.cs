@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravellerTicket.Core.DTO
+namespace TravellerTicket.Core.DTO.Admin
 {
-    public class CreateScheduleDTO
+    public class CreateScheduleAdminDTO
     {
         [Required]
         public string From { get; set; }
@@ -20,7 +20,7 @@ namespace TravellerTicket.Core.DTO
         [Required]
         [Range(1, int.MaxValue)]
         public int Capacity { get; set; }
-    
+
         //public string AdminId { get; set; }
     }
 }

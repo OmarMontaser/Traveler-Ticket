@@ -5,16 +5,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using TravellerTicket.Core.Context;
-using TravellerTicket.Core.DTO;
+using TravellerTicket.Core.DTO.Admin;
 using TravellerTicket.Core.Entities;
 using TravellerTicket.Helper;
 
 namespace TravellerTicket.Controllers
 {
-    //[Authorize(Roles = "User")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[Controller]")]
     [ApiController]
-    public class TicketController : ControllerBase
+    public class TicketAdminController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ namespace TravellerTicket.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public TicketController(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+        public TicketAdminController(ApplicationDbContext context, IMapper mapper, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _mapper = mapper;
@@ -33,7 +33,7 @@ namespace TravellerTicket.Controllers
 
 
         [HttpPost("addticket")]
-        public async Task<IActionResult> AddTicket([FromBody] CreateTicketDTO addTicket)
+        public async Task<IActionResult> AddTicket([FromBody] CreateTicketAdminDTO addTicket)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace TravellerTicket.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<IEnumerable<GetTicketDTO>>>> GetTickets([FromQuery] PaginationParams param, [FromQuery] string? q)
+        public async Task<ActionResult<ApiResponse<IEnumerable<GetTicketAdminDTO>>>> GetTickets([FromQuery] PaginationParams param, [FromQuery] string? q)
         {
             IQueryable<Ticket> query = _context.Tickets;
             if (q is not null)
@@ -64,9 +64,9 @@ namespace TravellerTicket.Controllers
                              .ToListAsync();
 
 
-            var convertedTickets = _mapper.Map<IEnumerable<GetTicketDTO>>(tickets);
+            var convertedTickets = _mapper.Map<IEnumerable<GetTicketAdminDTO>>(tickets);
 
-            return Ok(new ApiResponse<IEnumerable<GetTicketDTO>>
+            return Ok(new ApiResponse<IEnumerable<GetTicketAdminDTO>>
             {
                 Success = true,
                 Message = "Tickets retrieved successfully",
@@ -75,7 +75,7 @@ namespace TravellerTicket.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetTicketDTO>> GetTicketById([FromRoute] int id)
+        public async Task<ActionResult<GetTicketAdminDTO>> GetTicketById([FromRoute] int id)
         {
 
             var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.TicketId == id);
@@ -84,12 +84,12 @@ namespace TravellerTicket.Controllers
                 return NotFound("Ticket Not Found");
             }
 
-            var convertedTicket = _mapper.Map<GetTicketDTO>(ticket);
+            var convertedTicket = _mapper.Map<GetTicketAdminDTO>(ticket);
             return Ok(convertedTicket);
         }
 
         [HttpPut("editTicket/{id}")]
-        public async Task<IActionResult> EditTicket([FromRoute] int id,[FromBody] UpdateTicketDTO updateTicketDTO)
+        public async Task<IActionResult> EditTicket([FromRoute] int id,[FromBody] UpdateTicketAdminDTO updateTicketDTO)
         {
             var ticket = await _context.Tickets.FirstOrDefaultAsync(t => t.TicketId == id);
             if(ticket is null)

@@ -257,7 +257,7 @@ namespace TravellerTicket.Migrations
 
                     b.HasKey("ScheduleId");
 
-                    b.ToTable("Schedules");
+                    b.ToTable("Schedules", (string)null);
                 });
 
             modelBuilder.Entity("TravellerTicket.Core.Entities.Ticket", b =>
@@ -302,7 +302,7 @@ namespace TravellerTicket.Migrations
 
                     b.HasKey("TicketId");
 
-                    b.ToTable("Tickets");
+                    b.ToTable("Tickets", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

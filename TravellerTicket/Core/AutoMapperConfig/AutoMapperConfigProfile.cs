@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
-using TravellerTicket.Core.DTO;
+using TravellerTicket.Core.Context;
+using TravellerTicket.Core.DTO.Admin;
+using TravellerTicket.Core.DTO.User;
 using TravellerTicket.Core.Entities;
 
 namespace TravellerTicket.Core.AutoMapperConfig
@@ -8,13 +10,22 @@ namespace TravellerTicket.Core.AutoMapperConfig
     {
         public AutoMapperConfigProfile() 
         {
-            CreateMap<CreateTicketDTO, Ticket>();
-            CreateMap<Ticket, GetTicketDTO>();
-            CreateMap<UpdateTicketDTO,Ticket>();
+            CreateMap<CreateTicketAdminDTO, Ticket>();
+            CreateMap<Ticket, GetTicketAdminDTO>();
+            CreateMap<UpdateTicketAdminDTO,Ticket>();
            
-            CreateMap<CreateScheduleDTO, Schedule>();
-            CreateMap<Schedule, GetScheduleDTO>();
-            CreateMap<UpdateScheduleDTO, Schedule>();
+            CreateMap<CreateScheduleAdminDTO, Schedule>();
+            CreateMap<Schedule, GetScheduleAdminDTO>();
+            CreateMap<UpdateScheduleAdminDTO, Schedule>();
+
+
+            CreateMap<Ticket, GetTicketUserDTO>();
+
+
+
+            CreateMap<ApplicationUser, UserDTO>();
+            CreateMap<CreateUserDTO, ApplicationUser>();
+
         }
 
     }

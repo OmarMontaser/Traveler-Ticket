@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TravellerTicket.Core.DTO
+namespace TravellerTicket.Core.DTO.Admin
 {
-    public class GetTicketDTO
+    public class GetTicketAdminDTO
     {
-         [Key]
-         public int TicketId { get; set; }
+        [Key]
+        public int TicketId { get; set; }
         public DateTime Time { get; set; }
         public string PassengerName { get; set; }
         public string PassengerId { get; set; }

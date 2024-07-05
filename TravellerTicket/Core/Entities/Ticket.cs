@@ -16,6 +16,7 @@ namespace TravellerTicket.Core.Entities
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public string ConfidentialComment { get; set; } = "Normal";
 
+
         // Foreign Key to Schedule
         //public int ScheduleId { get; set; }
         //public Schedule Schedule { get; set; }

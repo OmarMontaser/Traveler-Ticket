@@ -3,24 +3,24 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravellerTicket.Core.Context;
-using TravellerTicket.Core.DTO;
 using TravellerTicket.Core.Entities;
 using TravellerTicket.Helper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using TravellerTicket.Core.DTO.Admin;
 
 namespace TravellerTicket.Controllers
 {
     //[Authorize(Roles = "Admin")]
     [Route("api/[Controller]")]
     [ApiController]
-    public class ScheduleController : ControllerBase
+    public class ScheduleAdminController : ControllerBase
     {
 
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
 
-        public ScheduleController(ApplicationDbContext context, IMapper mapper)
+        public ScheduleAdminController(ApplicationDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -28,7 +28,7 @@ namespace TravellerTicket.Controllers
 
         // Add Schedule
         [HttpPost("addSchedule")]
-        public async Task<IActionResult> AddSchedule([FromBody] CreateScheduleDTO createScheduleDTO)
+        public async Task<IActionResult> AddSchedule([FromBody] CreateScheduleAdminDTO createScheduleDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -46,7 +46,7 @@ namespace TravellerTicket.Controllers
 
         // Get all Schedules
         [HttpGet]
-        public async Task<ActionResult<ApiResponse<IEnumerable<GetScheduleDTO>>>> GetSchedules([FromQuery] PaginationParams param, [FromQuery] string? q)
+        public async Task<ActionResult<ApiResponse<IEnumerable<GetScheduleAdminDTO>>>> GetSchedules([FromQuery] PaginationParams param, [FromQuery] string? q)
         {
             IQueryable<Schedule> query = _context.Schedules;
             if (q is not null)
@@ -58,9 +58,9 @@ namespace TravellerTicket.Controllers
                              .Take(param.PageSize)
                              .ToListAsync();
 
-            var scheduleDTOs = _mapper.Map<IEnumerable<GetScheduleDTO>>(schedules);
+            var scheduleDTOs = _mapper.Map<IEnumerable<GetScheduleAdminDTO>>(schedules);
 
-            return Ok(new ApiResponse<IEnumerable<GetScheduleDTO>>
+            return Ok(new ApiResponse<IEnumerable<GetScheduleAdminDTO>>
             { 
               Success = true,
               Message = "Schedules retrieved successfully",
@@ -70,7 +70,7 @@ namespace TravellerTicket.Controllers
 
         // Get Schedule by Id
         [HttpGet("schedule/{id}")]
-        public async Task<ActionResult<ApiResponse<GetScheduleDTO>>> GetScheduleById(int id)
+        public async Task<ActionResult<ApiResponse<GetScheduleAdminDTO>>> GetScheduleById(int id)
         {
             var schedule = await _context.Schedules.FirstOrDefaultAsync(s => s.ScheduleId == id);
             if (schedule == null)
@@ -78,13 +78,13 @@ namespace TravellerTicket.Controllers
                 return NotFound(new ApiResponse<string> { Success = false, Message = "Schedule not found", Data = null });
             }
 
-            var scheduleDTO = _mapper.Map<GetScheduleDTO>(schedule);
-            return Ok(new ApiResponse<GetScheduleDTO> { Success = true, Message = "Schedule retrieved successfully", Data = scheduleDTO });
+            var scheduleDTO = _mapper.Map<GetScheduleAdminDTO>(schedule);
+            return Ok(new ApiResponse<GetScheduleAdminDTO> { Success = true, Message = "Schedule retrieved successfully", Data = scheduleDTO });
         }
 
         // Update Schedule
         [HttpPut("editSchedule/{id}")]
-        public async Task<IActionResult> EditSchedule(int id, [FromBody] UpdateScheduleDTO updateScheduleDTO)
+        public async Task<IActionResult> EditSchedule(int id, [FromBody] UpdateScheduleAdminDTO updateScheduleDTO)
         {
             var schedule = await _context.Schedules.FirstOrDefaultAsync(s => s.ScheduleId == id);
             if (schedule == null)
